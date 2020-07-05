@@ -15,3 +15,14 @@ func (repo *FishRepository) FindById(identifier int) (fish domain.Fish) {
 
 	return fish
 }
+
+func (repo *FishRepository) Count() int {
+	db := database.GormConnect()
+	defer db.Close()
+
+	var fishes domain.Fishes
+	count := 0
+	db.Find(&fishes).Count(&count)
+
+	return count
+}

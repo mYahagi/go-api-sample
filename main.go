@@ -1,18 +1,19 @@
 package main
 
 import (
-	"./src/app/infrastructure/database"
+	"./src/app/infrastructure/repository"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
-	db := database.GormConnect()
 
-	defer db.Close()
 	r.GET("/ping", func(c *gin.Context) {
+		repo := repository.FishRepository{}
+		fish := repo.FindById(1)
+
 		c.JSON(200, gin.H{
-			"message": "pong",
+			"message": fish.NAME,
 		})
 	})
 	r.Run() // listen and serve on 0.0.0.0:8080

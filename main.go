@@ -3,7 +3,7 @@ package main
 import (
 	"math/rand"
 
-	"./src/app/infrastructure/repository"
+	"./app/infrastructure/repository"
 	"github.com/gin-gonic/gin"
 )
 

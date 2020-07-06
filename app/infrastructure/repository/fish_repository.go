@@ -3,26 +3,33 @@ package repository
 import (
 	"../../domain"
 	"../database"
+	"github.com/jinzhu/gorm"
 )
 
-type FishRepository struct{}
+type FishRepository struct {
+	db *gorm.DB
+}
 
 func (repo *FishRepository) FindById(identifier int) (fish domain.Fish) {
-	db := database.GormConnect()
-	defer db.Close()
-
-	db.First(&fish, identifier)
+	repo.db.First(&fish, identifier)
+	defer repo.db.Close()
 
 	return fish
 }
 
 func (repo *FishRepository) Count() int {
-	db := database.GormConnect()
-	defer db.Close()
-
 	var fishes domain.Fishes
 	count := 0
-	db.Find(&fishes).Count(&count)
+
+	repo.db.Find(&fishes).Count(&count)
+	defer repo.db.Close()
 
 	return count
+}
+
+func NewFishRepository() *FishRepository {
+	fishRepository := new(FishRepository)
+	fishRepository.db = database.Connect()
+
+	return fishRepository
 }

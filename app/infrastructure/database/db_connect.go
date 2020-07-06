@@ -5,7 +5,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-func GormConnect() *gorm.DB {
+func Connect() *gorm.DB {
 	DBMS := "mysql"
 	USER := "root"
 	PASS := "pass"

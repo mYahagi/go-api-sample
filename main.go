@@ -11,7 +11,7 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/ping", func(c *gin.Context) {
-		repo := repository.FishRepository{}
+		repo := repository.NewFishRepository()
 
 		count := repo.Count()
 

@@ -14,7 +14,6 @@ func main() {
 		repo := repository.NewFishRepository()
 
 		count := repo.Count()
-
 		fish := repo.FindById(randomInt(count))
 
 		c.JSON(200, gin.H{

@@ -10,19 +10,24 @@ type FishRepository struct {
 	db *gorm.DB
 }
 
-func (repo *FishRepository) FindById(identifier int) (fish dto.Fish) {
-	repo.db.First(&fish, identifier)
+func (repo *FishRepository) FindById(identifier int) (*dto.Fish, error) {
+	var fish dto.Fish
+	if err := repo.db.First(&fish, identifier).Error; err != nil {
+		return nil, err
+	}
 
-	return fish
+	return &fish, nil
 }
 
-func (repo *FishRepository) Count() int {
+func (repo *FishRepository) Count() (*int, error) {
 	var fishes dto.Fishes
-	count := 0
+	var count int
 
-	repo.db.Find(&fishes).Count(&count)
+	if err := repo.db.Find(&fishes).Count(&count).Error; err != nil {
+		return nil, err
+	}
 
-	return count
+	return &count, nil
 }
 
 func NewFishRepository() *FishRepository {

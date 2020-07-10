@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"math/rand"
+	"net/http"
 
 	"../infrastructure/repository"
 )
@@ -10,8 +11,15 @@ import (
 func Catch(c *gin.Context) {
 	repo := repository.NewFishRepository()
 
-	count := repo.Count()
-	fish := repo.FindById(randomInt(count))
+	count, err := repo.Count()
+	if err != nil {
+		c.String(http.StatusBadRequest, "釣れませんでした")
+	}
+
+	fish, err := repo.FindById(randomInt(*count))
+	if err != nil {
+		c.String(http.StatusBadRequest, "釣れませんでした")
+	}
 
 	c.JSON(200, gin.H{
 		"釣れた魚": fish.NAME,

@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"../../domain"
 	"../database"
+	"../dto"
 	"github.com/jinzhu/gorm"
 )
 
@@ -10,14 +10,14 @@ type FishRepository struct {
 	db *gorm.DB
 }
 
-func (repo *FishRepository) FindById(identifier int) (fish domain.Fish) {
+func (repo *FishRepository) FindById(identifier int) (fish dto.Fish) {
 	repo.db.First(&fish, identifier)
 
 	return fish
 }
 
 func (repo *FishRepository) Count() int {
-	var fishes domain.Fishes
+	var fishes dto.Fishes
 	count := 0
 
 	repo.db.Find(&fishes).Count(&count)

@@ -1,4 +1,4 @@
-package domain
+package dto
 
 type Fish struct {
 	ID   int

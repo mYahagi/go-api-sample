@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"math"
 	"math/rand"
 	"net/http"
 
@@ -28,10 +29,10 @@ func Catch(c *gin.Context) {
 
 func randomInt(max int) int {
 	//こうしておけば本当にたまに釣れない
-	max += 1
+	maxRand := max + int(math.Ceil(float64(max*3/10)))
 	value := 0
 	for {
-		value = rand.Intn(max)
+		value = rand.Intn(maxRand)
 		if value > 0 {
 			break
 		}

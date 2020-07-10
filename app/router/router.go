@@ -9,16 +9,20 @@ import (
 func Router() {
 	r := gin.Default()
 
-	r.GET("/ping", func(c *gin.Context) {
-		repo := repository.NewFishRepository()
+	fishG := r.Group("fish")
+	{
+		fishG.GET("", func(c *gin.Context) {
+			repo := repository.NewFishRepository()
 
-		count := repo.Count()
-		fish := repo.FindById(randomInt(count))
+			count := repo.Count()
+			fish := repo.FindById(randomInt(count))
 
-		c.JSON(200, gin.H{
-			"釣れた魚": fish.NAME,
+			c.JSON(200, gin.H{
+				"釣れた魚": fish.NAME,
+			})
 		})
-	})
+	}
+
 	r.Run()
 }
 

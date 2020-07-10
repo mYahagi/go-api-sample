@@ -18,7 +18,7 @@ func Catch(c *gin.Context) {
 
 	fish, err := repo.FindById(randomInt(*count))
 	if err != nil {
-		c.String(http.StatusBadRequest, "釣れませんでした")
+		c.String(http.StatusBadRequest, "本当に釣れませんでした")
 	}
 
 	c.JSON(200, gin.H{
@@ -27,6 +27,8 @@ func Catch(c *gin.Context) {
 }
 
 func randomInt(max int) int {
+	//こうしておけば本当にたまに釣れない
+	max += 1
 	value := 0
 	for {
 		value = rand.Intn(max)

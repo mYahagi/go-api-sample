@@ -13,5 +13,5 @@ func Router() {
 		fishG.GET("", func(c *gin.Context) { controller.Catch(c) })
 	}
 
-	r.Run()
+	r.Run(":8080")
 }

@@ -7,10 +7,6 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-type IDataBase interface {
-	Connect() (*gorm.DB, error)
-}
-
 type DataBase struct{}
 
 func (DataBase) Connect() (*gorm.DB, error) {

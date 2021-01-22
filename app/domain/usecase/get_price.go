@@ -5,6 +5,9 @@ type GetPrice struct {
 }
 
 func (u GetPrice) Execute() (int, error) {
+	if u.endStation == "大阪駅" {
+		return 3000, nil
+	}
 	return 2000, nil
 }
 

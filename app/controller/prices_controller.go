@@ -7,8 +7,9 @@ import (
 
 type PriceController struct{}
 
-func (ctrl PriceController) Show(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "hello")
+func (ctrl PriceController) Show(res http.ResponseWriter, req *http.Request) {
+	endStation := req.FormValue("end")
+	fmt.Fprint(res, endStation)
 }
 
 func NewPriceController() *PriceController {

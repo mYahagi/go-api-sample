@@ -1,7 +1,8 @@
 package usecase
 
 type GetPrice struct {
-	endStation string
+	startStation string
+	endStation   string
 }
 
 func (u GetPrice) Execute() (int, error) {
@@ -11,8 +12,9 @@ func (u GetPrice) Execute() (int, error) {
 	return 2000, nil
 }
 
-func NewGetPrice(endStation string) *GetPrice {
+func NewGetPrice(startStation, endStation string) *GetPrice {
 	return &GetPrice{
-		endStation: endStation,
+		startStation: startStation,
+		endStation:   endStation,
 	}
 }

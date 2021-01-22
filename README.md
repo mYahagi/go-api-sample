@@ -1,2 +1,4 @@
 # go-api-sample
-Go × レイヤードアーキテクチャ練習用
+
+以下を題材にした Go × レイヤードアーキテクチャ練習用  
+https://github.com/masuda220/jr-pricing
